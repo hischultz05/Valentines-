@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Valentine</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ffe6ec;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 40px;
+        color: #c4003a;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    button {
+        padding: 20px 40px;
+        font-size: 1.5rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    #noBtn {
+        background: #666;
+        color: white;
+    }
+
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        transition: transform 0.2s ease;
+    }
+
+    .yay {
+        font-size: 8rem;
+        color: #ff004c;
+        font-weight: bold;
+    }
+
+    .heart {
+        position: absolute;
+        top: -50px;
+        color: #ff004c;
+        font-size: 2rem;
+        animation: fall linear forwards;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container" id="content">
+    <h1 id="title">Will you be my valentine &lt;3</h1>
+    <div class="buttons">
+        <button id="noBtn">No</button>
+        <button id="yesBtn">Of course</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const content = document.getElementById("content");
+
+    let scale = 1;
+
+    noBtn.addEventListener("click", () => {
+        scale += 0.2;
+        yesBtn.style.transform = `scale(${scale})`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        content.innerHTML = '<div class="yay">YAY</div>';
+        startHeartRain();
+    });
+
+    function startHeartRain() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.textContent = "<3";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, 150);
+    }
+</script>
+
+</body>
+</html>
